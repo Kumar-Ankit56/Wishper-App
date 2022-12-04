@@ -5,13 +5,13 @@ const ejs = require("ejs");
 var _ = require("lodash");
 const mongoose = require("mongoose");
 require("dotenv").config();
-var session = require('express-session')
-const passport=require('passport')
-const passportLocalMongoose=require('passport-local-mongoose')
-var cookieParser = require('cookie-parser')
+var session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+var cookieParser = require("cookie-parser");
 
 const app = express();
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 
@@ -20,23 +20,20 @@ var posts = [];
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-
 //setup session
-app.use(session({
-  secret: 'Ourfullstringsecret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: true }
-}))
-
+app.use(
+  session({
+    secret: "Ourfullstringsecret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 //Intialise passport
 app.use(passport.initialize());
 
-
 //use session through passport
 app.use(passport.session());
-
 
 //Conntect database with mongoose
 mongoose
@@ -63,13 +60,11 @@ userSchema.plugin(passportLocalMongoose);
 
 const User = new mongoose.model("User", userSchema);
 
-
 // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
 passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -83,44 +78,48 @@ app.get("/register", function (req, res) {
   res.render("register");
 });
 
-app.get("/secrets", function(req, res){
-  if (req.isAuthenticated()){
+app.get("/secrets", function (req, res) {
+  if (req.isAuthenticated()) {
     res.render("secrets");
   } else {
     res.redirect("/login");
   }
 });
 
-app.get("/logout", function(req, res){
+app.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");
 });
 
-
 app.post("/register", function (req, res) {
-  User.register({username: req.body.username}, req.body.password, function(err, user){
-    if (err) {
-      console.log(err);
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/secrets");
-      });
+  User.register(
+    { username: req.body.username },
+    req.body.password,
+    function (err, user) {
+      if (err) {
+        console.log(err);
+        res.redirect("/register");
+      } else {
+        console.log(passport.authenticate("local"));
+        passport.authenticate("local")(req, res, function () {
+          res.redirect("/secrets");
+        });
+      }
     }
-  });
+  );
 });
 
 app.post("/login", function (req, res) {
   const user = new User({
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
   });
 
-  req.login(user, function(err){
+  req.login(user, function (err) {
     if (err) {
       console.log(err);
     } else {
-      passport.authenticate("local")(req, res, function(){
+      passport.authenticate("local")(req, res, function () {
         res.redirect("/secrets");
       });
     }

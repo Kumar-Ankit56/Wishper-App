@@ -1,16 +1,134 @@
-
 body {
-  background-color: #E8ECEF;
+  background-color: #090221;
+}
+.main-container {
+  position: absolute;
+  width: 50%;
+  min-width: 350px;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  padding: 50px 10px;
+  border-radius: 5px;
+  display: grid;
+  justify-content: center;
+  font-family: sans-serif;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content i {
+  color: #f02242;
+}
+.content h2 {
+  color: #140642;
+}
+.btn {
+  width: 160px;
+  padding: 15px 0;
+  border-radius: 5px;
+  background-color: #090221;
+  color: #ffffff;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  outline: none;
+  margin-top: 24px;
+}
+.buttongrp {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-container-form {
+  position: absolute;
+  width: 50%;
+  min-width: 350px;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  padding: 35px 10px;
+  border-radius: 5px;
+  font-family: sans-serif;
 }
 
-.centered {
-    padding-top: 200px;
-    text-align: center;
-}
-
-.secret-text {
+/* register style */
+.main-container-form h1 {
+  color: #090221;
   text-align: center;
-  font-size: 2rem;
-  color: #fff;
-  background-color: #000;
+  padding-bottom: 13px;
+}
+
+.btn-form {
+  margin-left: 7rem;
+}
+
+/* Secrete-container */
+.secrete-container {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 50%;
+  font-family: sans-serif;
+}
+.secrete-container i {
+  color: #f02242;
+  margin-bottom: 13px;
+}
+.secrete-container h2 {
+  color: #ffffff;
+  font-size: 4rem;
+}
+.key {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.secrets-text {
+  margin-top: 2rem;
+  width: 31%;
+  min-width: 230px;
+  /* max-width: 400px; */
+  background-color: #ffffff;
+  border: 1px solid #c0b3e8;
+  border-radius: 5px;
+  font-family: sans-serif;
+  height: 7rem;
+}
+.secrets-text p {
+  text-align: center;
+  padding-top: 10px;
+}
+.secrete-btn {
+  margin-top: 5rem;
+  margin-left: 6rem;
+  width: 65%;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-secrete {
+  width: 160px;
+  padding: 15px 0;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #090221;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  outline: none;
+  margin-top: 24px;
 }
